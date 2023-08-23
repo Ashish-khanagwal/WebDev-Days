@@ -150,6 +150,48 @@ const outerFunction = (x) => {
 const result2 = outerFunction(5);
 console.log(result2);
 
-// ############# "This" Keyword in ARROW FUNCTIONS #############
+// ############# "This" Keyword in REGULAR FUNCTIONS & ARROW FUNCTIONS #############
+
+/*
+In regular functions the this keyword represented the object that called the function, which could be the window, the document, a button or whatever.
+With arrow functions the this keyword always represents the object that defined the arrow function.
+*/
+
+/* 
+1. Traditional Functions:
+In regular functions, the value of this depends on how the function is called. It can change based on function invocation, binding, and context.
+
+2. Arrow Functions:
+Arrow functions, unlike regular functions, capture the value of this from their surrounding context at the time of creation. They "inherit" the value of this from the enclosing scope
+*/
+
+const person = {
+  name: "Ashish",
+  profession: "DevOps Enginner",
+  intro: function () {
+    console.log(`My name is ${this.name}`);
+  },
+  // jobRole: () => {
+  //   console.log(`I work as an ${this.profession}`);
+  // },
+  // Since the global context (window object in browsers) does not have a job property, this.job is undefined.
+
+  /*
+arrow functions do not have their own this context and instead borrow it from their surrounding context. 
+In most cases, this surrounding context is the global context, which can lead to unexpected behavior. 
+However, when arrow functions are defined within regular functions, they inherit the this context of 
+the outer function, resulting in the desired behavior.
+*/
+  jobRole: function () {
+    const arrJob = () => {
+      console.log(`I work as an ${this.profession}`);
+    };
+    arrJob();
+  },
+};
+
+person.intro(); // My name is Ashish
+// person.jobRole(); // I work as an undefined (This is an arrow function)
+person.jobRole(); // arrow function inside regular function
 
 // ############# CALLBACK FUNCTIONS #############
