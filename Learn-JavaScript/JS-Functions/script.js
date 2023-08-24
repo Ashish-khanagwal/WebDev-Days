@@ -194,4 +194,99 @@ person.intro(); // My name is Ashish
 // person.jobRole(); // I work as an undefined (This is an arrow function)
 person.jobRole(); // arrow function inside regular function
 
-// ############# CALLBACK FUNCTIONS #############
+// ############# FUNCTION SCOPE #############
+
+/*
+When you declare a variable inside a function, that variable is like an item you place in a specific room.
+The variable is accessible within that room (function) and any smaller rooms inside it (nested functions).
+However, you can't directly reach into another room (function) to access variables stored there. 
+Each room (function) has its own space for variables, which helps keep things organized and separate.
+*/
+
+/*
+Function scope helps prevent conflicts and keeps your code organized. Just like in a house, each 
+room (function) can have its own "stuff" (variables) without interfering with other rooms.
+*/
+
+const greetMe = function (daytime) {
+  const withName = function (myName) {
+    console.log(`Hello, ${myName} ${daytime}`);
+  };
+  return withName("Ashish Khanagwal");
+};
+greetMe("Good morning");
+
+// ############# CLOSURE #############
+
+/*
+Closures are like a magical way that functions remember things even after they're done running.
+They're a powerful concept in programming that allows you to create special functions that 
+"remember" their surroundings even after they're no longer active.
+*/
+
+/*
+When you create a function, it has a little backpack called a closure that it carries around.
+Inside the closure, the function can keep things safe, like variables, even after it's done working.
+If the function is no longer needed, its closure can still be used by other functions to access those special things.
+*/
+
+const outerFunc = function (x) {
+  const innerFunc = function (y) {
+    return x + y;
+  };
+  return innerFunc;
+};
+
+const addFunc = outerFunc(7); // This is creating a funciton that adds 7
+
+console.log(addFunc); // This will print out that innerFunc stays inside it. see below
+/* OUTPUT:
+ƒ (y) {
+    return x + y;
+  }
+*/
+
+console.log(addFunc(7)); // Output - 14
+
+/*
+In this example, outerFunc creates a special function that remembers the value of x. 
+When you call outerFunc(7), it returns a function that adds x to any number you give it.
+Even though outerFunc is done running, the function it returned (which we named addFunc) still remembers the value x = 7
+*/
+
+/*
+Closures are like a little memory bubble that functions carry around, and they allow functions to access variables and 
+values from their surrounding scope, even after that scope is no longer active.
+This makes closures incredibly useful for creating flexible and reusable functions, callbacks, and much more in programming.
+*/
+
+const greetLater = function (userName) {
+  setTimeout(function () {
+    console.log(`Hello, ${userName}`);
+  }, 1000);
+};
+greetLater("Ashish");
+
+/*
+In this example, the setTimeout function takes a callback function as its first argument.
+Even though the greetLater function finishes quickly, the callback function inside setTimeout
+remembers the name parameter and uses it after the greetLater function has finished.
+So, after 1 second, the callback function says "Hello, Ashish" because it still has 
+access to the name parameter through closure.
+*/
+
+// ############# CALLBACKS #############
+
+/*
+A callback function is a function that is passed to another function as an argument and is executed after some operation has been completed.
+*/
+
+const greet = function (name) {
+  console.log(`Keep going, ${name}`);
+};
+const sayHiToMyFriend = function () {
+  setTimeout(function () {
+    greet("Ashish Khanagwal");
+  }, 1000);
+};
+sayHiToMyFriend();
