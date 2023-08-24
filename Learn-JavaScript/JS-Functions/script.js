@@ -263,7 +263,7 @@ This makes closures incredibly useful for creating flexible and reusable functio
 const greetLater = function (userName) {
   setTimeout(function () {
     console.log(`Hello, ${userName}`);
-  }, 1000);
+  }, 0);
 };
 greetLater("Ashish");
 
@@ -274,19 +274,3 @@ remembers the name parameter and uses it after the greetLater function has finis
 So, after 1 second, the callback function says "Hello, Ashish" because it still has 
 access to the name parameter through closure.
 */
-
-// ############# CALLBACKS #############
-
-/*
-A callback function is a function that is passed to another function as an argument and is executed after some operation has been completed.
-*/
-
-const greet = function (name) {
-  console.log(`Keep going, ${name}`);
-};
-const sayHiToMyFriend = function () {
-  setTimeout(function () {
-    greet("Ashish Khanagwal");
-  }, 1000);
-};
-sayHiToMyFriend();
