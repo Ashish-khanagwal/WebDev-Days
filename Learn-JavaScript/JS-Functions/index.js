@@ -71,4 +71,46 @@ Imagine you're reading a book, and you want to do something after each chapter i
 You could use a callback to trigger that action at the end of each chapter.
 */
 
-function readBookChapters(chapter, callback) {}
+// function readBookChapters(chapter, callback) {
+//   console.log(`Started Reading ${chapter}...`);
+//   setTimeout(function () {
+//     console.log(`Finishd Reading ${chapter}`);
+//     takeNotes();
+//     callback();
+//   }, 2000);
+// }
+
+// function takeNotes() {
+//   console.log("Taking notes of the chapter.");
+// }
+
+// function readNextChapter() {
+//   readBookChapters(2, takeNotes);
+// }
+
+// readBookChapters(1, readNextChapter);
+
+function readBookChapters(chapter, callback) {
+  console.log(`Started Reading ${chapter}...`);
+  setTimeout(function () {
+    console.log(`Finished Reading ${chapter}`);
+    callback(chapter); // Pass chapter number to the callback
+  }, 2000);
+}
+
+function takeNotes(chapter) {
+  console.log(`Taking notes of chapter ${chapter}.`);
+}
+
+function readNextChapter(currentChapter) {
+  if (currentChapter === 1) {
+    readBookChapters(2, function (chapter) {
+      takeNotes(chapter);
+    });
+  }
+}
+
+readBookChapters(1, function (chapter) {
+  takeNotes(chapter);
+  readNextChapter(chapter);
+});
