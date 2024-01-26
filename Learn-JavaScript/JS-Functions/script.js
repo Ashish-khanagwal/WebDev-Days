@@ -116,6 +116,7 @@ const add = (x, y) => {
 };
 
 console.log(add(5, 10));
+ls;
 
 // If the function has only one statement, and the statement returns a value, you can remove the brackets and the return keyword:
 
