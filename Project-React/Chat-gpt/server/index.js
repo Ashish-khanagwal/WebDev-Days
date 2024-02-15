@@ -5,12 +5,6 @@ import env from "dotenv";
 // import { Configuration, OpenAIApi } from "openai";
 import OpenAI from "openai";
 
-// configure open api
-const openai = new OpenAI({
-  organization: "org-ZOSfuPC2wjRywwTM6iueuVZi",
-  apiKey: "API_KEY", // This is also the default, can be omitted
-});
-
 const app = express();
 
 env.config();
@@ -21,6 +15,12 @@ app.use(bodyParser.json());
 // const Configuration = new Configuration({
 //   organization: "org-ZOSfuPC2wjRywwTM6iueuVZi",
 // });
+
+// configure open api
+const openai = new OpenAI({
+  organization: "org-ZOSfuPC2wjRywwTM6iueuVZi",
+  apiKey: "API_KEY", // This is also the default, can be omitted
+});
 
 // listening
 app.listen("3080", () => console.log("Server is running on port 3080"));
